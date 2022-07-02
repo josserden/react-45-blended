@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from 'date-fns';
+import { formatDateToNow } from 'helpers/formatDistanceToNow';
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -15,10 +15,6 @@ import {
   UserName,
   Date,
 } from './BlogCard.styled';
-
-const formatDateToNow = date => {
-  return formatDistanceToNow(new Date(date), { addSuffix: true });
-};
 
 export const BlogCard = ({
   poster,
