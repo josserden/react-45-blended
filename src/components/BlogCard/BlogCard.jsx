@@ -21,7 +21,7 @@ export const BlogCard = ({
   tag,
   title,
   id,
-  name,
+  userName,
   postedAt,
   description,
   avatar,
@@ -38,9 +38,9 @@ export const BlogCard = ({
       </CardBody>
       <CardFooter>
         <UserBox>
-          <Avatar src={avatar} alt={name} />
+          <Avatar src={avatar} alt={userName} />
           <UserInfo>
-            <UserName>{name}</UserName>
+            <UserName>{userName}</UserName>
             <Date>{formatDateToNow(postedAt)}</Date>
           </UserInfo>
         </UserBox>
@@ -53,7 +53,7 @@ BlogCard.propTypes = {
   poster: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
   postedAt: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
