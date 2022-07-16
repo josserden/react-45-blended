@@ -27,12 +27,16 @@ export class Gallery extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const data = await ImageService.getImages(query, page);
-      const limitPage =
-        data.page < Math.ceil(data.total_results / data.per_page);
+      const {
+        page: currentPage,
+        total_results,
+        per_page,
+        photos,
+      } = await ImageService.getImages(query, page);
+      const limitPage = currentPage < Math.ceil(total_results / per_page);
 
       this.setState(prevState => ({
-        images: [...prevState.images, ...data.photos],
+        images: [...prevState.images, ...photos],
         isVisible: limitPage,
       }));
     } catch (error) {
