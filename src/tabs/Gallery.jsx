@@ -11,11 +11,6 @@ export class Gallery extends Component {
     isVisible: false,
   };
 
-  componentDidMount() {
-    const { query, page } = this.state;
-    this.getPhotos(query, page);
-  }
-
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.state;
 
