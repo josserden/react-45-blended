@@ -9,6 +9,8 @@ export class Gallery extends Component {
     query: '',
     page: 1,
     isVisible: false,
+    error: null,
+    isLoading: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -22,6 +24,8 @@ export class Gallery extends Component {
   getPhotos = async (query, page) => {
     if (!query) return;
 
+    this.setState({ isLoading: true });
+
     try {
       const data = await ImageService.getImages(query, page);
       const limitPage =
@@ -32,7 +36,10 @@ export class Gallery extends Component {
         isVisible: limitPage,
       }));
     } catch (error) {
+      this.setState({ error: error.message });
       console.log('error: ', error);
+    } finally {
+      this.setState({ isLoading: false });
     }
   };
 
@@ -52,14 +59,17 @@ export class Gallery extends Component {
   };
 
   render() {
-    const { isVisible, images } = this.state;
+    const { isVisible, images, error, isLoading } = this.state;
     const { handleFormSubmit, handleLoadMore } = this;
 
     return (
       <>
         <SearchForm onSubmit={handleFormSubmit} />
-        {images.length === 0 && (
+        {images.length === 0 && !error && (
           <Text textAlign="center">Sorry. There are no images ... 😭</Text>
+        )}
+        {error && (
+          <Text textAlign="center">❌ Something went wrong - {error}</Text>
         )}
         <Grid>
           {images.map(({ id, avg_color, alt, src }) => {
@@ -72,7 +82,11 @@ export class Gallery extends Component {
             );
           })}
         </Grid>
-        {isVisible && <Button onClick={handleLoadMore}>Load more</Button>}
+        {isVisible && (
+          <Button onClick={handleLoadMore} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Load more'}
+          </Button>
+        )}
       </>
     );
   }
