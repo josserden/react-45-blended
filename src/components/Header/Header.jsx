@@ -1,8 +1,9 @@
-import { useTheme } from '@emotion/react';
-import { Container } from 'components/App/App.styled';
-
-import { FaFlagUsa } from 'react-icons/fa';
 import { Outlet } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
+
+import { Container } from 'components/App/App.styled';
+import { FaFlagUsa } from 'react-icons/fa';
+
 import {
   HeaderWrapper,
   LinkWrapper,

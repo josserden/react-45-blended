@@ -1,32 +1,13 @@
-import { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { BtnSearch, Select, SearchFormStyled } from './SearchForm.styled';
 
-export const SearchForm = ({ onSubmit }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    onSubmit(searchQuery);
-    setSearchQuery('');
-  };
-
-  const onHandleChange = event => {
-    setSearchQuery(event.target.value);
-  };
-
+export const SearchForm = () => {
   return (
-    <SearchFormStyled onSubmit={handleSubmit}>
+    <SearchFormStyled>
       <BtnSearch type="submit">
         <FiSearch size="16px" />
       </BtnSearch>
-      <Select
-        aria-label="select"
-        name="region"
-        onChange={onHandleChange}
-        required
-      >
+      <Select aria-label="select" name="region" required>
         <option selected disabled defaultValue="">
           Select a region and press enter
         </option>
