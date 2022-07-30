@@ -1,46 +1,20 @@
-import {
-  BlogCard,
-  Container,
-  CryptoHistory,
-  ForbesList,
-  Heading,
-  Section,
-  Statistics,
-} from 'components';
-import article from 'data/article.json';
-import data from 'data/data.json';
-import forbes from 'data/forbes.json';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { Header } from 'components';
+import { CountrySearch, Home, Country } from 'pages';
 
 export const App = () => {
   return (
-    <Section>
-      <Container>
-        <Heading marginBottom="50px" textAlign="center">
-          Task 1
-        </Heading>
-        <BlogCard
-          poster={article.poster}
-          tag={article.tag}
-          title={article.title}
-          description={article.description}
-          userName={article.name}
-          avatar={article.avatar}
-          postedAt={article.postedAt}
-        />
-        <Heading marginTop="50px" marginBottom="50px" textAlign="center">
-          Task 2
-        </Heading>
-        <Statistics title="Main Statistics" stats={data} />
-        {/* <Statistics stats={data} /> */}
-        <Heading marginTop="50px" marginBottom="50px" textAlign="center">
-          Task 3
-        </Heading>
-        <ForbesList list={forbes} />
-        <Heading marginTop="50px" marginBottom="50px" textAlign="center">
-          Task 4
-        </Heading>
-        <CryptoHistory />
-      </Container>
-    </Section>
+    <>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index path="/" element={<Home />} />
+          <Route path="/country" element={<CountrySearch />} />
+          <Route path="/country/:id" element={<Country />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 };
