@@ -5,12 +5,19 @@ import 'modern-normalize';
 
 import { App } from 'components';
 import { GlobalStyles, theme } from 'styles';
+import { store, persistor } from 'redux/store'
+import { Provider as ReduxProvider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Global styles={GlobalStyles} />
-      <App />
-    </ThemeProvider>
+    <ReduxProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider  ovider theme={theme}>
+        <Global styles={GlobalStyles} />
+        <App />
+        </ThemeProvider>
+      </PersistGate>
+    </ReduxProvider>
   </React.StrictMode>
 );
